@@ -52,11 +52,13 @@ internal class Graph<T> {
 
     //checks  a  graph  has  edge  or  not
     //where  s  and  d  are  the  two  parameters  that  represent  source(vertex)  and  destination  (vertex)
-    fun containsEdge(s: T, d: T) {
-        if (Objects.requireNonNull<List<T>>(map[s]).contains(d)) {
+    fun containsEdge(s: T, d: T): Boolean {
+        return if (Objects.requireNonNull<List<T>>(map[s]).contains(d)) {
             println("The  graph  has  an  edge  between  $s  and  $d.")
+            true
         } else {
             println("There  is  no  edge  between  $s  and  $d.")
+            false
         }
     }
 

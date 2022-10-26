@@ -1,38 +1,30 @@
 package com.codeenjoyers.graph
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val graph = Graph<Int>()
 
+        findViewById<FloatingActionButton>(R.id.addBtn).setOnClickListener {
+            graph.addNewEdge(findViewById<EditText>(R.id.iSeekbar).text.toString().toInt(), findViewById<EditText>(R.id.jSeekbar).text.toString().toInt(), true)
+        }
         findViewById<FloatingActionButton>(R.id.runBtn).setOnClickListener {
-            val graph = Graph<Int>()
-            //adding  edges  to  the  graph
-            graph.addNewEdge(0, 1, true)
-            graph.addNewEdge(0, 4, true)
-            graph.addNewEdge(1, 2, true)
-            graph.addNewEdge(1, 3, false)
-            graph.addNewEdge(1, 4, true)
-            graph.addNewEdge(2, 3, true)
-            graph.addNewEdge(2, 4, true)
-            graph.addNewEdge(3, 0, true)
-            graph.addNewEdge(2, 0, true)
-            //prints  the  adjacency  matrix  that  represents  the  graph
-            println("Adjacency  List  for  the  graph:\n$graph")
-            //counts  the  number  of  vertices  in  the  graph
-            graph.countVertices()
-            //counts  the  number  of  edges  in  the  graph
-            graph.countEdges(true)
-            //checks  whether  an  edge  is  present  or  not  between  the  two  specified  vertices
-            graph.containsEdge(3, 4)
-            graph.containsEdge(2, 4)
-            //checks  whether  vertex  is  present  or  not
-            graph.containsVertex(3)
-            graph.containsVertex(5)
+            if (graph.containsEdge(findViewById<EditText>(R.id.editTextNumberDecimal).text.toString().toInt(),findViewById<EditText>(R.id.editTextNumberDecimal1).text.toString().toInt()))
+                Snackbar.make(findViewById<ConstraintLayout>(R.id.viewLayout), "Znaleziono połączenie",
+                    Snackbar.LENGTH_LONG).setAction("Action", null).setBackgroundTint(Color.GREEN).show()
+            else
+                Snackbar.make(findViewById<ConstraintLayout>(R.id.viewLayout), "Nie znaleziono połączenia",
+                    Snackbar.LENGTH_LONG).setAction("Action", null).setBackgroundTint(Color.RED).show()
         }
     }
 }
