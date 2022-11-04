@@ -1,80 +1,34 @@
 package com.codeenjoyers.graph
 
-import java.lang.StringBuilder
-import java.util.*
+import kotlin.math.abs
 
-internal class Graph<T> {
-    //creating  an  object  of  the  Map  class  that  stores  the  edges  of  the  graph
-    private val map: MutableMap<T, MutableList<T>> = HashMap()
+// Edges for graph
+data class Edge(val node1: Node, val node2: Node, val distance: Int)
 
-    //the  method  adds  a  new  vertex  to  the  graph
-    fun addNewVertex(s: T) {
-        map[s] = LinkedList()
+class Graph {
+    data class IntNode(val i: Int) : Node
+    var nodes: List<Edge> = listOf()
+
+    fun addNewEdge(source:Int,destination:Int){
+        nodes = nodes + Edge(IntNode(source), IntNode(destination), abs(destination-source))
     }
 
-    //the  method  adds  an  edge  between  source  and  destination
-    fun addNewEdge(source: T, destination: T, bidirectional: Boolean) {
-        //
-        if (!map.containsKey(source)) addNewVertex(source)
-        if (!map.containsKey(destination)) addNewVertex(destination)
-        Objects.requireNonNull(map[source])?.add(destination)
-        if (bidirectional) {
-            Objects.requireNonNull(map[destination])?.add(source)
-        }
+    fun containsEdge(source: Int,destination: Int):Boolean{
+        for (edge in nodes)
+            if (edge.node1==IntNode(source) && edge.node2==IntNode(destination))
+                return true
+        return false
     }
 
-    //the  method  counts  the  number  of  vertices
-    fun countVertices() {
-        println("Total  number  of  vertices:  " + map.keys.size)
-    }
+    fun findP(source:Int,destination:Int): String{
+        val res = findShortestPath(nodes,IntNode(source),IntNode(destination))
 
-    //the  method  counts  the  number  of  edges
-    fun countEdges(bidirection: Boolean) {
-        //variable  to  store  number  of  edges
-        var count = 0
-        for (v in map.keys) {
-            count += Objects.requireNonNull<List<T>>(map[v]).size
-        }
-        if (bidirection) {
-            count /= 2
-        }
-        println("Total  number  of  edges:  $count")
-    }
+        if (res.shortestPath().isEmpty())
+            return "No path available"
 
-    //checks  a  graph  has  vertex  or  not
-    fun containsVertex(s: T) {
-        if (map.containsKey(s)) {
-            println("The  graph  contains  $s  as  a  vertex.")
-        } else {
-            println("The  graph  does  not  contain  $s  as  a  vertex.")
-        }
-    }
-
-    //checks  a  graph  has  edge  or  not
-    //where  s  and  d  are  the  two  parameters  that  represent  source(vertex)  and  destination  (vertex)
-    fun containsEdge(s: T, d: T): Boolean {
-        return if (Objects.requireNonNull<List<T>>(map[s]).contains(d)) {
-            println("The  graph  has  an  edge  between  $s  and  $d.")
-            true
-        } else {
-            println("There  is  no  edge  between  $s  and  $d.")
-            false
-        }
-    }
-
-    //prints  the  adjacencyS  list  of  each  vertex
-    //here  we  have  overridden  the  toString()  method  of  the  StringBuilder  class
-    override fun toString(): String {
-        val builder = StringBuilder()
-        //foreach  loop  that  iterates  over  the  keys
-        for (v in map.keys) {
-            builder.append(v.toString()).append(":  ")
-            //foreach  loop  for  getting  the  vertices
-            for (w in Objects.requireNonNull<List<T>>(map[v])) {
-                builder.append(w.toString()).append("  ")
-            }
-            builder.append("\n")
-        }
-        return builder.toString()
+        var result: String =""
+        for(node in res.shortestPath())
+            result+=" ${(node as IntNode).i} ->"
+        return "Path found: ${result.substring(0,result.length-3)}"
     }
 }
