@@ -39,10 +39,22 @@ class MainActivity : AppCompatActivity() {
                     ).setAction("Action", null).setBackgroundTint(Color.RED).show()
                 return@setOnClickListener
             }
-            Log.wtf("DZIALA?",graph.findP(
+            val foundConn:String = graph.findP(
                 findViewById<EditText>(R.id.editTextNumberDecimal).text.toString().toInt(),
                 findViewById<EditText>(R.id.editTextNumberDecimal1).text.toString().toInt()
-            ))
+            )
+            if (foundConn!="No path available"){
+                Snackbar.make(
+                    findViewById<ConstraintLayout>(R.id.viewLayout), foundConn,
+                    Snackbar.LENGTH_LONG
+                ).setAction("Action", null).setBackgroundTint(Color.GREEN).show()
+                return@setOnClickListener
+            }
+            Snackbar.make(
+                findViewById<ConstraintLayout>(R.id.viewLayout),
+                foundConn,
+                Snackbar.LENGTH_LONG
+            ).setAction("Action", null).setBackgroundTint(Color.RED).show()
         }
     }
 }

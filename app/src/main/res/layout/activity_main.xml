@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="306dp"
         android:layout_height="115dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -15,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1">
+        app:layout_constraintVertical_bias="0.04">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -49,19 +50,23 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:hint="Enter Source" />
+                android:digits="1234567890"
+                android:hint="Enter Source"
+                android:imeOptions="actionDone"
+                android:inputType="numberDecimal"
+                tools:ignore="HardcodedText" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
         android:layout_width="306dp"
         android:layout_height="115dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cardView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.340">
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -90,21 +95,25 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:hint="Enter Destination" />
+                android:digits="1234567890"
+                android:hint="Enter Destination"
+                android:imeOptions="actionDone"
+                android:inputType="numberDecimal"
+                tools:ignore="HardcodedText" />
 
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
         android:layout_width="306dp"
         android:layout_height="250dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/runBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.760">
+        app:layout_constraintTop_toBottomOf="@+id/cardView3">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -127,11 +136,11 @@
                 android:id="@+id/isdj"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/wart"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
 
-                android:layout_below="@id/wart"
+                android:layout_marginEnd="10dp"
                 android:text="Dijkstra" />
 
             <EditText
@@ -143,8 +152,10 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
+                android:digits="1234567890"
                 android:ems="10"
                 android:hint="Enter Source"
+                android:imeOptions="actionDone"
                 android:inputType="numberDecimal"
                 android:minHeight="48dp"
                 tools:ignore="HardcodedText"
@@ -160,8 +171,10 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
+                android:digits="1234567890"
                 android:ems="10"
                 android:hint="Enter Destination"
+                android:imeOptions="actionDone"
                 android:inputType="numberDecimal"
                 android:minHeight="48dp"
                 tools:ignore="HardcodedText"
@@ -183,7 +196,7 @@
         app:layout_constraintHorizontal_bias="0.853"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.933"
+        app:layout_constraintVertical_bias="0.955"
         app:srcCompat="@android:drawable/ic_media_play" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -196,7 +209,7 @@
         app:layout_constraintHorizontal_bias="0.149"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.933"
+        app:layout_constraintVertical_bias="0.955"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 
